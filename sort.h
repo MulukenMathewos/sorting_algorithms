@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef _SORT_H
+#define _SORT_H
 
 #include <stdio.h>
 #include <unistd.h>
