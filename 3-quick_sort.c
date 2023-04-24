@@ -1,7 +1,8 @@
 #include "sort.h"
 
 /**
- * quick_sort - Sorts an array of integers in ascending order using Quick sort algorithm
+ * quick_sort - Sorts an array of integers in
+ * ascending order using Quick sort algorithm
  * @array: The array to be sorted
  * @size: Number of elements in @array
  *
@@ -9,10 +10,10 @@
  */
 void quick_sort(int *array, size_t size)
 {
-    if (array == NULL || size < 2)
-        return;
+	if (array == NULL || size < 2)
+		return;
 
-    quicksort_recursive(array, 0, size - 1, size);
+	quicksort_recursive(array, 0, size - 1, size);
 }
 
 /**
@@ -26,14 +27,14 @@ void quick_sort(int *array, size_t size)
  */
 void quicksort_recursive(int *array, int start, int end, size_t size)
 {
-    int pivot;
+	int pivot;
 
-    if (start < end)
-    {
-        pivot = lomuto_partition(array, start, end, size);
-        quicksort_recursive(array, start, pivot - 1, size);
-        quicksort_recursive(array, pivot + 1, end, size);
-    }
+	if (start < end)
+	{
+		pivot = lomuto_partition(array, start, end, size);
+		quicksort_recursive(array, start, pivot - 1, size);
+		quicksort_recursive(array, pivot + 1, end, size);
+	}
 }
 
 /**
@@ -47,26 +48,26 @@ void quicksort_recursive(int *array, int start, int end, size_t size)
  */
 int lomuto_partition(int *array, int start, int end, size_t size)
 {
-    int pivot = array[end], i = start - 1, j;
+	int pivot = array[end], i = start - 1, j;
 
-    for (j = start; j <= end - 1; j++)
-    {
-        if (array[j] <= pivot)
-        {
-            i++;
-            if (i != j)
-            {
-                swap(&array[i], &array[j]);
-                print_array(array, size);
-            }
-        }
-    }
-    if (i + 1 != end)
-    {
-        swap(&array[i + 1], &array[end]);
-        print_array(array, size);
-    }
-    return (i + 1);
+	for (j = start; j <= end - 1; j++)
+	{
+		if (array[j] <= pivot)
+		{
+			i++;
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				print_array(array, size);
+			}
+		}
+	}
+	if (i + 1 != end)
+	{
+		swap(&array[i + 1], &array[end]);
+		print_array(array, size);
+	}
+	return (i + 1);
 }
 
 /**
@@ -78,7 +79,7 @@ int lomuto_partition(int *array, int start, int end, size_t size)
  */
 void swap(int *a, int *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
