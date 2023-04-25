@@ -40,7 +40,8 @@ void bitonic_sort(int *array, size_t size);
 void bitonic_merge(int *array, size_t size, int dir);
 void bitonic_sort_helper(int *array, size_t size, int dir);
 void quick_sort_hoare(int *array, size_t size);
-void quicksort_recursive(int *array, int start, int end, size_t size);
+int hoare_partition(int *array, int low, int high, size_t size);
+void quicksort_hoare(int *array, int low, int high, size_t size);
 int lomuto_partition(int *array, int start, int end, size_t size);
 
 #endif
