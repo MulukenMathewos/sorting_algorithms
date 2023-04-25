@@ -28,7 +28,7 @@ void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
 void swap(int *a, int *b);
-static void sift_down(int *array, size_t start, size_t end);
+void sift_down(int *array, size_t start, size_t end);
 void counting_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
 void merge(int *array, int left, int mid, int right);
