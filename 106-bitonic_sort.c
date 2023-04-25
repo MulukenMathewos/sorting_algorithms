@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "sort.h"
 
 /**
@@ -24,7 +23,8 @@ void bitonic_merge(int *array, size_t start, size_t count, bool direction)
 
 				array[i] = array[i + k];
 				array[i + k] = temp;
-				printf("Merging [%lu/%lu] (%s):\n", count, count, direction ? "UP" : "DOWN");
+				printf("Merging [%lu/%lu] (%s):\n", count, count,
+						direction ? "UP" : "DOWN");
 				print_array(array, start + count);
 			}
 		}
