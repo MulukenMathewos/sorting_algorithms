@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "sort.h"
 
 /**
@@ -23,7 +22,6 @@ void merge(int *array, int left, int mid, int right)
 
 	if (!left_arr || !right_arr)
 		return;
-
 	for (i = 0; i < n1; i++)
 		left_arr[i] = array[left + i];
 	for (j = 0; j < n2; j++)
@@ -32,30 +30,32 @@ void merge(int *array, int left, int mid, int right)
 	i = 0;
 	j = 0;
 	k = left;
-
-	while (i < n1 && j < n2) {
-		if (left_arr[i] <= right_arr[j]) {
+	while (i < n1 && j < n2)
+	{
+		if (left_arr[i] <= right_arr[j])
+		{
 			array[k] = left_arr[i];
 			i++;
-		} else {
+		}
+		else
+		{
 			array[k] = right_arr[j];
 			j++;
 		}
 		k++;
 	}
-
-	while (i < n1) {
+	while (i < n1)
+	{
 		array[k] = left_arr[i];
 		i++;
 		k++;
 	}
-
-	while (j < n2) {
+	while (j < n2)
+	{
 		array[k] = right_arr[j];
 		j++;
 		k++;
 	}
-
 	free(left_arr);
 	free(right_arr);
 }
