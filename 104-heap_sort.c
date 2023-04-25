@@ -9,7 +9,7 @@
  *
  * Return: void
  */
-static void sift_down(int *array, size_t start, size_t end)
+void sift_down(int *array, size_t start, size_t end)
 {
 	size_t root = start;
 
