@@ -71,10 +71,11 @@ void merge(int *array, int left, int mid, int right)
  */
 void merge_sort(int *array, size_t size)
 {
+	int mid;
 	if (size < 2)
 		return;
 
-	int mid = size / 2;
+	mid = size / 2;
 
 	merge_sort(array, mid);
 	merge_sort(array + mid, size - mid);
