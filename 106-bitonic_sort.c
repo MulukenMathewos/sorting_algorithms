@@ -9,10 +9,10 @@
  */
 void bitonic_sort(int *array, size_t size)
 {
-    if (array == NULL || size < 2)
-        return;
+	if (array == NULL || size < 2)
+		return;
 
-    bitonic_sort_helper(array, size, 1);
+	bitonic_sort_helper(array, size, 1);
 }
 
 /**
@@ -23,13 +23,13 @@ void bitonic_sort(int *array, size_t size)
  */
 void bitonic_sort_helper(int *array, size_t size, int dir)
 {
-    if (size < 2)
-        return;
+	if (size < 2)
+		return;
 
-    bitonic_sort_helper(array, size / 2, 1);
-    bitonic_sort_helper(array + size / 2, size / 2, 0);
+	bitonic_sort_helper(array, size / 2, 1);
+	bitonic_sort_helper(array + size / 2, size / 2, 0);
 
-    bitonic_merge(array, size, dir);
+	bitonic_merge(array, size, dir);
 }
 
 /**
@@ -40,24 +40,23 @@ void bitonic_sort_helper(int *array, size_t size, int dir)
  */
 void bitonic_merge(int *array, size_t size, int dir)
 {
-    int i, j, temp;
-    int k = size / 2;
+	int i, temp;
+	int k = size / 2;
 
-    for (i = 0; i < k; i++)
-    {
-        if ((array[i] > array[i + k]) == dir)
-        {
-            /* swap array[i] and array[i+k] */
-            temp = array[i];
-            array[i] = array[i + k];
-            array[i + k] = temp;
-            printf("Swap: %d %d\n", array[i], array[i + k]);
-        }
-    }
-
-    if (size > 2)
-    {
-        bitonic_merge(array, k, dir);
-        bitonic_merge(array + k, k, dir);
-    }
+	for (i = 0; i < k; i++)
+	{
+		if ((array[i] > array[i + k]) == dir)
+		{
+			/* swap array[i] and array[i+k] */
+			temp = array[i];
+			array[i] = array[i + k];
+			array[i + k] = temp;
+			printf("Swap: %d %d\n", array[i], array[i + k]);
+		}
+	}
+	if (size > 2)
+	{
+		bitonic_merge(array, k, dir);
+		bitonic_merge(array + k, k, dir);
+	}
 }
