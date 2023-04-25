@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * counting_sort - Sorts an array of integers
+ * counting_sort1 - Sorts an array of integers
  * @array: Pointer to the array of integers
  * @size: Size of the array
  * @exp: Exponent to calculate the significant digit
