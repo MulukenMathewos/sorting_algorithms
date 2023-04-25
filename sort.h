@@ -34,6 +34,7 @@ void merge_sort(int *array, size_t size);
 void merge(int *array, int left, int mid, int right);
 void heap_sort(int *array, size_t size);
 void radix_sort(int *array, size_t size);
+void counting_sort(int *array, size_t size, int exp);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 void quicksort_recursive(int *array, int start, int end, size_t size);
