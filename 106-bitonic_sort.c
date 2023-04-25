@@ -1,52 +1,72 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "sort.h"
 
 /**
- * bitonic_merge - Merge two bitonic sequences in ascending or descending order
- * @array: Array to sort
- * @size: Number of elements to merge
- * @ascending: True for ascending order, false for descending
- */
-void bitonic_merge(int *array, size_t size, int ascending)
-{
-	if (size > 1)
-	{
-		size_t i, mid = size / 2;
-
-		bitonic_merge(array, mid, 1);
-		bitonic_merge(array + mid, mid, 0);
-		for (i = 0; i < mid; i++)
-		{
-			if ((array[i] > array[i + mid]) == ascending)
-			{
-				int temp = array[i];
-
-				array[i] = array[i + mid];
-				array[i + mid] = temp;
-			}
-		}
-		printf("Merging [%lu/%lu] (%s):\n", size, size, ascending ? "UP" : "DOWN");
-		print_array(array, size);
-	}
-}
-
-/**
- * bitonic_sort - Sort an array of integers in ascending order
- * using the bitonic sort algorithm
- * @array: Array to sort
- * @size: Size of the array
+ * bitonic_sort - Sorts an array of integers in ascending order using the
+ *                Bitonic sort algorithm
+ * @array: The array to be sorted
+ * @size: The size of the array
  */
 void bitonic_sort(int *array, size_t size)
 {
-	if (size > 1)
-	{
-		size_t mid = size / 2;
+    if (array == NULL || size < 2)
+        return;
 
-		bitonic_sort(array, mid);
-		bitonic_sort(array + mid, mid);
-		bitonic_merge(array, size, 1);
-		printf("Merging [%lu/%lu] (UP):\n", size, size);
-		print_array(array, size);
-	}
+    bitonic_recursive(array, size, 0, size, 1);
+}
+
+/**
+ * bitonic_recursive - Recursively sorts an array of integers in ascending order
+ *                     using the Bitonic sort algorithm
+ * @array: The array to be sorted
+ * @size: The size of the array
+ * @start: The starting index of the subarray to be sorted
+ * @count: The number of elements in the subarray to be sorted
+ * @order: The order of sorting (1 for ascending, -1 for descending)
+ */
+void bitonic_recursive(int *array, size_t size, size_t start, size_t count, int order)
+{
+    size_t half = count / 2;
+    int swapped = 0;
+
+    if (count > 1)
+    {
+        printf("Merging [%lu/%lu] (%s):\n", count, size, order == 1 ? "UP" : "DOWN");
+        print_array(array + start, count);
+
+        for (size_t i = start; i < start + half; i++)
+        {
+            if ((array[i] > array[i + half]) == order)
+            {
+                swap(&array[i], &array[i + half]);
+                swapped = 1;
+            }
+        }
+
+        if (swapped)
+        {
+            bitonic_recursive(array, size, start, half, order);
+            bitonic_recursive(array, size, start + half, half, order);
+        }
+    }
+
+    if (count == size)
+    {
+        printf("Result [%lu/%lu] (%s):\n", count, size, order == 1 ? "UP" : "DOWN");
+        print_array(array + start, count);
+    }
+}
+
+/**
+ * swap - Swaps two integers in an array
+ * @a: The first integer to be swapped
+ * @b: The second integer to be swapped
+ */
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+
+    printf("Result [%d/%d] (UP):\n", *a, *b);
+    print_array((const int *)a, 2);
 }
