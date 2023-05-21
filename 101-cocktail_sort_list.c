@@ -30,7 +30,8 @@ void cocktail_sort_list(listint_t **list)
 			break;
 
 		swapped = 0;
-		for (current = current->prev; current != NULL; current = current->prev)
+		current = current->prev;
+		for (; current != NULL && current->prev != NULL; current = current->prev)
 		{
 			if (current->n < current->prev->n)
 			{
