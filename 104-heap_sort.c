@@ -1,66 +1,65 @@
 #include "sort.h"
-#include <stdio.h>
 
 /**
- * sift_down - repair the heap whose root element is at index 'start'
- * @array: Array to sort
- * @start: index of the root element in the heap
- * @end: index of the last element in the heap
- *
- * Return: void
+ * swap_root - A function that swap the root nodes.
+ * @array: The heap to sort.
+ * @root: The root of the heap.
+ * @hi: The higher index.
+ * @size: The size of the array.
+ * Return: Nothing
  */
-void sift_down(int *array, size_t start, size_t end)
+void swap_root(int *array, size_t root, size_t hi, size_t size)
 {
-	size_t root = start;
+	size_t lo = 0, mi = 0, tmp = 0;
+	int aux = 0;
 
-	while ((2 * root + 1) <= end)
+	while ((lo = (2 * root + 1)) <= hi)
 	{
-		size_t child = 2 * root + 1;
-		size_t swap = root;
-
-		if (array[swap] < array[child])
-			swap = child;
-		if (child + 1 <= end && array[swap] < array[child + 1])
-			swap = child + 1;
-		if (swap != root)
-		{
-			int tmp = array[root];
-
-			array[root] = array[swap];
-			array[swap] = tmp;
-			print_array(array, end + 1);
-			root = swap;
-		}
-		else
-		{
+		tmp = root;
+		mi = lo + 1;
+		if (array[tmp] < array[lo])
+			tmp = lo;
+		if (mi <= hi && array[tmp] < array[mi])
+			tmp = mi;
+		if (tmp == root)
 			return;
-		}
+		aux = array[root];
+		array[root] = array[tmp];
+		array[tmp] = aux;
+		print_array(array, size);
+		root = tmp;
 	}
 }
 
 /**
- * heap_sort - sorts an array of integers in ascending order
- * using the Heap sort algorithm
- * @array: Array to sort
- * @size: Size of the array
- *
- * Return: void
+ * heap_sort - A function that sorts an array using heap algorithm.
+ * @array: An array to sort.
+ * @size: The size of the array.
+ * Return: Nothing.
  */
 void heap_sort(int *array, size_t size)
 {
-	int i;
+	size_t hi = 0, gap = 0;
+	int tmp = 0;
 
-	if (size < 2 || !array)
-		return;
-	for (i = size / 2 - 1; i >= 0; i--)
-		sift_down(array, i, size - 1);
-	for (i = size - 1; i > 0; i--)
+		if (array == NULL || size < 2)
+			return;
+
+		for (gap = (size - 2) / 2; 1; gap--)
+		{
+			swap_root(array, gap, size - 1, size);
+			if (gap == 0)
+				break;
+		}
+
+		hi = size - 1;
+		while (hi > 0)
 	{
-		int tmp = array[0];
-
-		array[0] = array[i];
-		array[i] = tmp;
+		tmp = array[hi];
+		array[hi] = array[0];
+		array[0] = tmp;
 		print_array(array, size);
-		sift_down(array, 0, i - 1);
+		hi--;
+		swap_root(array, 0, hi, size);
 	}
 }
