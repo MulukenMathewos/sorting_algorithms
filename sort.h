@@ -45,5 +45,5 @@ void quick_s(int *array, int lo, int hi, size_t size);
 void merge(size_t lo, size_t mi, size_t hi, int *dest, int *src);
 void merge_partition(size_t lo, size_t hi, int *array, int *base);
 void swap_root(int *array, size_t root, size_t hi, size_t size);
-void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2);	
+void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2);
 #endif /* __SORT__ */
