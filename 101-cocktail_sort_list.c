@@ -1,86 +1,73 @@
 #include "sort.h"
 
 /**
- * swap_nodes - Swaps two nodes in a doubly linked list
- * @a: Pointer to first node
- * @b: Pointer to second node
- * @list: Pointer to the head of the list
- *
- * Return: No value returned
+ * quick_sort - function that sorts an array of integers
+ *              in ascending order using the Quick sort algorithm
+ * @array: array
+ * @size: array's size
+ * Return: void
  */
-void swap_nodes(listint_t **a, listint_t **b, listint_t **list)
+void quick_sort(int *array, size_t size)
 {
-	listint_t *prev_a, *next_b;
+	if (array == NULL || size < 2)
+		return;
 
-	prev_a = (*a)->prev;
-	next_b = (*b)->next;
-
-	if (prev_a)
-		prev_a->next = *b;
-	else
-		*list = *b;
-
-	(*b)->prev = prev_a;
-	(*b)->next = *a;
-	(*a)->prev = *b;
-	(*a)->next = next_b;
-
-	if (next_b)
-		next_b->prev = *a;
-
-	print_list((const listint_t *)*list);
+	quick_s(array, 0, size - 1, size);
 }
 
 /**
- * cocktail_sort_list - Sorts a doubly linked list in ascending order
- * using the Cocktail shaker sort algorithm
- * @list: Pointer to the head of the list
- *
- * Return: No value returned
+ * partition - partition
+ * @array: array
+ * @lo: lower
+ * @hi: higher
+ * @size: array's size
+ * Return: i
  */
-void cocktail_sort_list(listint_t **list)
+int partition(int *array, int lo, int hi, size_t size)
 {
-	listint_t *start, *end;
-	int swapped;
+	int i = lo - 1, j = lo;
+	int pivot = array[hi], aux = 0;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
-		return;
-
-	start = *list;
-	end = NULL;
-	swapped = 1;
-
-	while (swapped == 1)
+	for (; j < hi; j++)
 	{
-		swapped = 0;
-
-		while (start != end)
+		if (array[j] < pivot)
 		{
-			if (start->n > start->next->n)
+			i++;
+			if (array[i] != array[j])
 			{
-				swap_nodes(&start, &(start->next), list);
-				swapped = 1;
+				aux = array[i];
+				array[i] = array[j];
+				array[j] = aux;
+				print_array(array, size);
 			}
-			else
-				start = start->next;
 		}
+	}
+	if (array[i + 1] != array[hi])
+	{
+		aux = array[i + 1];
+		array[i + 1] = array[hi];
+		array[hi] = aux;
+		print_array(array, size);
+	}
+	return (i + 1);
+}
 
-		if (swapped == 0)
-			break;
+/**
+ * quick_s - quick sort
+ * @array: given array
+ * @lo: lower
+ * @hi:higher
+ * @size: array's size
+ * Return: void
+ */
+void quick_s(int *array, int lo, int hi, size_t size)
+{
+	int pivot;
 
-		swapped = 0;
-		end = start;
-		start = start->prev;
-
-		while (start != end)
-		{
-			if (start->n > start->next->n)
-			{
-				swap_nodes(&start, &(start->next), list);
-				swapped = 1;
-			}
-			else
-				start = start->prev;
-		}
+	if (lo < hi)
+	{
+		pivot = partition(array, lo, hi, size);
+		quick_s(array, lo, pivot - 1, size);
+		quick_s(array, pivot + 1, hi, size);
 	}
 }
