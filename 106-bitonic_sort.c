@@ -1,24 +1,6 @@
 #include "sort.h"
 
 /**
- * print_array - Prints the elements of an array
- * @array: The array to be printed
- * @size: The size of the array
- */
-void print_array(const int *array, size_t size)
-{
-    size_t i;
-
-    for (i = 0; i < size; i++)
-    {
-        printf("%d", array[i]);
-        if (i != size - 1)
-            printf(", ");
-    }
-    printf("\n");
-}
-
-/**
  * compare_swap - Compares and swaps two elements based on direction
  * @array: The array containing the elements
  * @i: The index of the first element
