@@ -47,4 +47,6 @@ void merge(size_t lo, size_t mi, size_t hi, int *dest, int *src);
 void merge_partition(size_t lo, size_t hi, int *array, int *base);
 void swap_root(int *array, size_t root, size_t hi, size_t size);
 void swap_nodes(listint_t **node1, listint_t **node2);
+void compare_swap(int *array, size_t i, size_t j, int dir);
+void bitonic_merge(int *array, size_t low, size_t count, int dir);
 #endif /* __SORT__ */
